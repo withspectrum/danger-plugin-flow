@@ -3,13 +3,10 @@ import flow from "./index"
 declare const global: any
 
 const files = {
-  "src/typed.js":
-    "// @flow\nconst a = 'b'",
-  "src/typed-with-asteriks.js":
-    "/* @flow */\nconst a = 'b'",
-  "src/untyped.js":
-    "const a = 'b'",
-  "src/second-untyped.js": "const a = 'c'"
+  "src/typed.js": "// @flow\nconst a = 'b'",
+  "src/typed-with-asteriks.js": "/* @flow */\nconst a = 'b'",
+  "src/untyped.js": "const a = 'b'",
+  "src/second-untyped.js": "const a = 'c'",
 }
 
 const fileNames = Object.keys(files)
@@ -44,7 +41,7 @@ describe("flow()", () => {
     global.markdown = undefined
   })
 
-  it("calls fail if there\'s untyped new files", async () => {
+  it("calls fail if there's untyped new files", async () => {
     await flow()
     expect(global.fail).toHaveBeenCalled()
     expect(global.fail.mock.calls[0][0]).toMatchSnapshot()
@@ -57,6 +54,12 @@ describe("flow()", () => {
 
   it("does not include modified files if modified is set to false", async () => {
     await flow({ modified: false })
+    expect(global.fail).toHaveBeenCalled()
+    expect(global.fail.mock.calls[0][0]).toMatchSnapshot()
+  })
+
+  it("respects the blacklist globs", async () => {
+    await flow({ blacklist: ["src/untyped*"] })
     expect(global.fail).toHaveBeenCalled()
     expect(global.fail.mock.calls[0][0]).toMatchSnapshot()
   })

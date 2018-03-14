@@ -10,3 +10,8 @@ exports[`flow() does not include modified files if modified is set to false 1`] 
 "These files do not have Flow enabled:
  - src/untyped.js (new)"
 `;
+
+exports[`flow() respects the blacklist globs 1`] = `
+"These files do not have Flow enabled:
+ - src/second-untyped.js (modified)"
+`;
