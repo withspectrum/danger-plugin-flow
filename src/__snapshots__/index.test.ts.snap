@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`flow() calls fail if there's untyped new files 1`] = `
+"These new files do not have Flow enabled:
+ - src/untyped.js
+ - src/second-untyped.js"
+`;
+
+exports[`flow() does not include modified files if modified is set to false 1`] = `
+"These new files do not have Flow enabled:
+ - src/untyped.js"
+`;
