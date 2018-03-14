@@ -40,7 +40,7 @@ export default async function flow(options: Options = {}) {
   const unflowedFiles = files.filter(({ content }) => !/@flow/.test(content)).map(({ path }) => path)
 
   method(
-    `These new files do not have Flow enabled:\n - ${unflowedFiles
+    `These files do not have Flow enabled:\n - ${unflowedFiles
       .map(path => `${path} (${danger.git.modified_files.indexOf(path) > -1 ? "modified" : "new"})`)
       .join("\n - ")}`
   )
