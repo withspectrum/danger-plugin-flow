@@ -39,6 +39,10 @@ export default async function flow(options: Options = {}) {
 
   const unflowedFiles = files.filter(({ content }) => !/@flow/.test(content)).map(({ path }) => path)
 
+  if (unflowedFiles.length === 0) {
+    return
+  }
+
   method(
     `These files do not have Flow enabled:\n - ${unflowedFiles
       .map(path => `${path} (${danger.git.modified_files.indexOf(path) > -1 ? "modified" : "new"})`)
