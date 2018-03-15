@@ -25,6 +25,17 @@ schedule(flow());
 
 ### Options
 
+**Recommended setup**:
+
+```JS
+schedule(flow({
+  modified: "warn",
+  created: "fail"
+}))
+```
+
+This will fail the build for any newly introduced file that isn't flow typed, but will only warn the developer if they touch a file that's not flow typed. This is what we use because it can be hard to type legacy code, but we want to ensure every newly incoming code is properly typed.
+
 #### `blacklist`
 
 Blacklist certain globs from being checked:
@@ -35,21 +46,37 @@ schedule(flow({
 }))
 ```
 
-#### `warn`
+#### `created`
 
-Warn if files are untyped rather than failing:
+Decide whether you want to warn, fail or ignore newly created files that are untyped:
 
 ```JS
 schedule(flow({
-  warn: true
+  created: "warn"
+}))
+
+schedule(flow({
+  created: "fail"
+}))
+
+schedule(flow({
+  created: false
 }))
 ```
 
 #### `modified`
 
-Don't include modified files, only newly created ones:
+Decide whether you want to warn, fail or ignore modified files that are untyped:
 
 ```JS
+schedule(flow({
+  modified: "warn"
+}))
+
+schedule(flow({
+  modified: "fail"
+}))
+
 schedule(flow({
   modified: false
 }))

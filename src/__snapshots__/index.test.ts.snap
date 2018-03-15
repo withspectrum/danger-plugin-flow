@@ -1,17 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`flow() calls fail if there's untyped modified files 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
+`;
+
 exports[`flow() calls fail if there's untyped new files 1`] = `
-"These files do not have Flow enabled:
- - src/untyped.js (new)
- - src/second-untyped.js (modified)"
+"These **new** files do not have Flow enabled:
+ - src/untyped.js"
+`;
+
+exports[`flow() calls fail twice if there's untyped files 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
+`;
+
+exports[`flow() calls fail twice if there's untyped files 2`] = `
+"These **new** files do not have Flow enabled:
+ - src/untyped.js"
+`;
+
+exports[`flow() calls warn if there's untyped modified files 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
+`;
+
+exports[`flow() calls warn if there's untyped new files 1`] = `
+"These **new** files do not have Flow enabled:
+ - src/untyped.js"
+`;
+
+exports[`flow() does not include created files if modified is set to false 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
 `;
 
 exports[`flow() does not include modified files if modified is set to false 1`] = `
-"These files do not have Flow enabled:
- - src/untyped.js (new)"
+"These **new** files do not have Flow enabled:
+ - src/untyped.js"
 `;
 
 exports[`flow() respects the blacklist globs 1`] = `
-"These files do not have Flow enabled:
- - src/second-untyped.js (modified)"
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
 `;

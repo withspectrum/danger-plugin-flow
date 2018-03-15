@@ -11,10 +11,12 @@ export declare function markdown(message: string): void
 
 const ENDS_WITH_JS = /jsx?$/i
 
+export type Method = "warn" | "fail" | "message" | false
+
 export interface Options {
   blacklist?: string[]
-  warn?: boolean
-  modified?: boolean
+  modified?: Method
+  created?: Method
 }
 
 /**
@@ -23,7 +25,8 @@ export interface Options {
 export default async function flow(options: Options = {}) {
   const blacklist = options && options.blacklist ? options.blacklist : []
   const includeModifiedFiles = options.modified === false ? false : true
-  const method = options.warn ? warn : fail
+  const modifiedMethod = options.modified === undefined ? "fail" : options.modified
+  const createdMethod = options.created === undefined ? "fail" : options.created
   const jsFiles = danger.git.created_files
     .concat(includeModifiedFiles ? danger.git.modified_files : [])
     .filter(path => ENDS_WITH_JS.test(path))
@@ -43,9 +46,18 @@ export default async function flow(options: Options = {}) {
     return
   }
 
-  method(
-    `These files do not have Flow enabled:\n - ${unflowedFiles
-      .map(path => `${path} (${danger.git.modified_files.indexOf(path) > -1 ? "modified" : "new"})`)
-      .join("\n - ")}`
-  )
+  const modifiedUnflowedFiles = unflowedFiles.filter(path => danger.git.modified_files.indexOf(path) > -1)
+  const createdUnflowedFiles = unflowedFiles.filter(path => danger.git.created_files.indexOf(path) > -1)
+
+  if (modifiedUnflowedFiles.length > 0 && modifiedMethod) {
+    // tslint:disable-next-line max-line-length
+    window[modifiedMethod](
+      `These **modified** files do not have Flow enabled:\n - ${modifiedUnflowedFiles.join("\n - ")}`
+    )
+  }
+
+  if (createdUnflowedFiles.length > 0 && createdMethod) {
+    // tslint:disable-next-line max-line-length
+    window[createdMethod](`These **new** files do not have Flow enabled:\n - ${createdUnflowedFiles.join("\n - ")}`)
+  }
 }

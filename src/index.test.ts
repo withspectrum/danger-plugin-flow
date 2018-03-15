@@ -42,19 +42,58 @@ describe("flow()", () => {
   })
 
   it("calls fail if there's untyped new files", async () => {
+    global.danger.git.modified_files = []
     await flow()
     expect(global.fail).toHaveBeenCalled()
+    expect(global.fail).toHaveBeenCalledTimes(1)
     expect(global.fail.mock.calls[0][0]).toMatchSnapshot()
   })
 
-  it("calls warn if the warn option is true", async () => {
-    await flow({ warn: true })
+  it("calls fail if there's untyped modified files", async () => {
+    global.danger.git.created_files = []
+    await flow()
+    expect(global.fail).toHaveBeenCalled()
+    expect(global.fail).toHaveBeenCalledTimes(1)
+    expect(global.fail.mock.calls[0][0]).toMatchSnapshot()
+  })
+
+  it("calls fail twice if there's untyped files", async () => {
+    await flow()
+    expect(global.fail).toHaveBeenCalled()
+    expect(global.fail).toHaveBeenCalledTimes(2)
+    expect(global.fail.mock.calls[0][0]).toMatchSnapshot()
+    expect(global.fail.mock.calls[1][0]).toMatchSnapshot()
+  })
+
+  it("calls warn if there's untyped new files", async () => {
+    global.danger.git.modified_files = []
+    await flow({ created: "warn" })
     expect(global.warn).toHaveBeenCalled()
+    expect(global.fail).not.toHaveBeenCalled()
+    expect(global.warn).toHaveBeenCalledTimes(1)
+    expect(global.warn.mock.calls[0][0]).toMatchSnapshot()
+  })
+
+  it("calls warn if there's untyped modified files", async () => {
+    global.danger.git.created_files = []
+    await flow({ modified: "warn" })
+    expect(global.warn).toHaveBeenCalled()
+    expect(global.fail).not.toHaveBeenCalled()
+    expect(global.warn).toHaveBeenCalledTimes(1)
+    expect(global.warn.mock.calls[0][0]).toMatchSnapshot()
   })
 
   it("does not include modified files if modified is set to false", async () => {
     await flow({ modified: false })
     expect(global.fail).toHaveBeenCalled()
+    expect(global.fail).toHaveBeenCalledTimes(1)
+    expect(global.fail.mock.calls[0][0]).toMatchSnapshot()
+  })
+
+  it("does not include created files if modified is set to false", async () => {
+    await flow({ created: false })
+    expect(global.fail).toHaveBeenCalled()
+    expect(global.fail).toHaveBeenCalledTimes(1)
     expect(global.fail.mock.calls[0][0]).toMatchSnapshot()
   })
 
