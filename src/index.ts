@@ -23,6 +23,13 @@ export interface Options {
  * Make sure people flowtype their code
  */
 export default async function flow(options: Options = {}) {
+  // The danger methods, keyed by their name
+  const methods = {
+    fail,
+    warn,
+    message,
+  }
+
   const blacklist = options && options.blacklist ? options.blacklist : []
   const includeModifiedFiles = options.modified === false ? false : true
   const modifiedMethod = options.modified === undefined ? "fail" : options.modified
@@ -51,13 +58,13 @@ export default async function flow(options: Options = {}) {
 
   if (modifiedUnflowedFiles.length > 0 && modifiedMethod) {
     // tslint:disable-next-line max-line-length
-    window[modifiedMethod](
+    methods[modifiedMethod](
       `These **modified** files do not have Flow enabled:\n - ${modifiedUnflowedFiles.join("\n - ")}`
     )
   }
 
   if (createdUnflowedFiles.length > 0 && createdMethod) {
     // tslint:disable-next-line max-line-length
-    window[createdMethod](`These **new** files do not have Flow enabled:\n - ${createdUnflowedFiles.join("\n - ")}`)
+    methods[createdMethod](`These **new** files do not have Flow enabled:\n - ${createdUnflowedFiles.join("\n - ")}`)
   }
 }
