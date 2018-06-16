@@ -48,11 +48,11 @@ export default async function flow(options: Options = {}) {
   )
 
   function detectFlowPragma(content): boolean {
-    const flowPragma = "@flow"
+    const flowPragmas = ["@flow", "@noflow"]
     const maxLines = 10
     const lines = content.toString("utf-8").split("\n", maxLines)
 
-    return lines.filter(line => line.includes(flowPragma)).length === 0
+    return lines.filter(line => line.includes(flowPragmas[0]) || line.includes(flowPragmas[1])).length === 0
   }
 
   const unflowedFiles = files.filter(({ content }) => detectFlowPragma(content)).map(({ path }) => path)

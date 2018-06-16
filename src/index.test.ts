@@ -7,6 +7,7 @@ const files = {
   "src/typed-with-asteriks.js": "/* @flow */\nconst a = 'b'",
   "src/untyped.js": "const a = 'b'",
   "src/second-untyped.js": "const a = 'c'",
+  "src/noflow.js": "// @noflow\nconst a = 'b'",
 }
 
 const fileNames = Object.keys(files)
@@ -39,6 +40,13 @@ describe("flow()", () => {
     global.fail = undefined
     global.markdown = undefined
     global.danger = undefined
+  })
+
+  it("detect @noflow", async () => {
+    global.danger.git.modified_files = [fileNames[4]]
+    global.danger.git.created_files = [fileNames[4]]
+    await flow()
+    expect(global.fail).not.toHaveBeenCalled()
   })
 
   it("calls fail if there's untyped new files", async () => {
