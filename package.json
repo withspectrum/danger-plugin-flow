@@ -86,6 +86,6 @@
     ]
   },
   "dependencies": {
-    "micromatch": "^3.1.9"
+    "micromatch": "^3.1.10"
   }
 }
