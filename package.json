@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/jest": "^19.2.4",
-    "commitizen": "^2.9.6",
+    "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.0.0",
     "danger": "*",
     "husky": "^0.13.3",
