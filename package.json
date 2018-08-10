@@ -15,8 +15,7 @@
   "homepage": "https://github.com/withspectrum/danger-plugin-flow#readme",
   "keywords": [
     "danger",
-    "danger-plugin",
-    ""
+    "danger-plugin"
   ],
   "version": "1.4.0",
   "main": "dist/index.js",
