@@ -988,8 +988,8 @@ cz-conventional-changelog@^2.0.0:
     word-wrap "^1.0.3"
 
 danger@*:
-  version "3.8.8"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-3.8.8.tgz#4bd7715c38a5f82dad6ef6b069cc23065a6bcd27"
+  version "3.8.9"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-3.8.9.tgz#bca0f3e6eb24f5c6e3b4740f49921b9308933f50"
   dependencies:
     "@octokit/rest" "^15.9.5"
     babel-polyfill "^6.23.0"
