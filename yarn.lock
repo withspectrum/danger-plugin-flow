@@ -1004,8 +1004,8 @@ cz-conventional-changelog@^2.0.0:
     word-wrap "^1.0.3"
 
 danger@*:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-4.3.0.tgz#c49fd1910729ffde902d72d0a0c259c18dda79f8"
+  version "4.3.8"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-4.3.8.tgz#c2cae8c81f84870e121fa062d00c56a0b84d3f0f"
   dependencies:
     "@babel/polyfill" "^7.0.0"
     "@octokit/rest" "^15.12.1"
@@ -1026,6 +1026,7 @@ danger@*:
     memfs-or-file-map-to-github-branch "^1.1.0"
     node-cleanup "^2.1.2"
     node-fetch "^2.2.0"
+    override-require "^1.1.1"
     p-limit "^2.0.0"
     parse-diff "^0.5.1"
     parse-git-config "^2.0.3"
@@ -3590,6 +3591,10 @@ osenv@^0.1.0, osenv@^0.1.4:
   dependencies:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
+
+override-require@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/override-require/-/override-require-1.1.1.tgz#6ae22fadeb1f850ffb0cf4c20ff7b87e5eb650df"
 
 p-finally@^1.0.0:
   version "1.0.0"
