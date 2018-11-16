@@ -1004,8 +1004,8 @@ cz-conventional-changelog@^2.0.0:
     word-wrap "^1.0.3"
 
 danger@*:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-6.1.1.tgz#8738688773c85720a7f0f5f1e912699a738a776f"
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-6.1.4.tgz#3b4efc1f35a3b11d4d13c18db71148f6afe35e73"
   dependencies:
     "@babel/polyfill" "^7.0.0"
     "@octokit/rest" "^15.12.1"
