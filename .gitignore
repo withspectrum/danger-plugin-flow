@@ -70,4 +70,7 @@ dist/
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Vim
+*.sw*
+
 # End of https://www.gitignore.io/api/node,visualstudiocode

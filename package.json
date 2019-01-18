@@ -28,11 +28,11 @@
     "test": "jest",
     "predocs": "rm -rf docs/",
     "docs": "esdoc -c .esdoc.json",
-    "prepublish": "npm run build",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "prepublish": "yarn build",
+    "semantic-release": "semantic-release pre && yarn publish && semantic-release post",
     "prettier": "prettier",
-    "prettier-write": "npm run prettier -- --parser typescript --no-semi --trailing-comma es5 --write --print-width 120",
-    "prettier-project": "npm run prettier-write -- 'src/**/*.{ts,tsx}'",
+    "prettier-write": "yarn prettier --parser typescript --no-semi --trailing-comma es5 --write --print-width 120",
+    "prettier-project": "yarn prettier-write 'src/**/*.{ts,tsx}'",
     "lint": "tslint \"src/**/*.ts\""
   },
   "license": "MIT",
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@types/jest": "^19.2.4",
+    "@types/node": "^10.12.18",
     "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.0.0",
     "danger": "*",
@@ -65,7 +66,7 @@
   "lint-staged": {
     "*.@(ts|tsx)": [
       "tslint --fix",
-      "npm run prettier-write --",
+      "yarn prettier-write --",
       "git add"
     ]
   },
