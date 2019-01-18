@@ -1,6 +1,5 @@
 declare var require: (string) => any
-// tslint:disable-next-line
-const mm = require("micromatch")
+import mm from "micromatch"
 // Provides dev-time type structures for  `danger` - doesn't affect runtime.
 import { DangerDSLType } from "../node_modules/danger/distribution/dsl/DangerDSL"
 declare var danger: DangerDSLType
