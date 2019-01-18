@@ -1,4 +1,5 @@
 declare var require: (string) => any
+import fs from "fs"
 import mm from "micromatch"
 // Provides dev-time type structures for  `danger` - doesn't affect runtime.
 import { DangerDSLType } from "../node_modules/danger/distribution/dsl/DangerDSL"
@@ -12,10 +13,41 @@ const ENDS_WITH_JS = /jsx?$/i
 
 export type Method = "warn" | "fail" | "message" | false
 
+export const PLATFORM_GITHUB = "github"
+export const PLATFORM_LOCAL = "local"
+export const PLATFORMS = {
+  [PLATFORM_GITHUB]: PLATFORM_GITHUB,
+  [PLATFORM_LOCAL]: PLATFORM_LOCAL,
+}
+
+export type Platform = keyof typeof PLATFORMS
+
 export interface Options {
   blacklist?: string[]
   modified?: Method
   created?: Method
+  platform?: Platform
+}
+
+function readFileLocal(path: string) {
+  const FILE_ENCODING = "utf8"
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, FILE_ENCODING, (err, data) => {
+      if (err) {
+        reject(err)
+        return
+      }
+
+      resolve({ path, content: data })
+    })
+  })
+}
+
+function readFileGitHub(path: string) {
+  return danger.github.utils.fileContents(path).then(content => ({
+    path,
+    content,
+  }))
 }
 
 /**
@@ -38,12 +70,13 @@ export default async function flow(options: Options = {}) {
     .filter(path => ENDS_WITH_JS.test(path))
   const unignoredFiles: string[] = mm.not(jsFiles, blacklist)
   const files = await Promise.all(
-    unignoredFiles.map(path =>
-      danger.github.utils.fileContents(path).then(content => ({
-        path,
-        content,
-      }))
-    )
+    unignoredFiles.map(path => {
+      if (options.platform && options.platform === PLATFORM_LOCAL) {
+        return readFileLocal(path)
+      } else {
+        return readFileGitHub(path)
+      }
+    })
   )
 
   function detectFlowPragma(content): boolean {

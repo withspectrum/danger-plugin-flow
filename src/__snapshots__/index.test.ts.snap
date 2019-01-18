@@ -40,6 +40,51 @@ exports[`flow() does not include modified files if modified is set to false 1`] 
  - src/untyped.js"
 `;
 
+exports[`flow() local calls fail if there's untyped modified files 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
+`;
+
+exports[`flow() local calls fail if there's untyped new files 1`] = `
+"These **new** files do not have Flow enabled:
+ - src/untyped.js"
+`;
+
+exports[`flow() local calls fail twice if there's untyped files 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
+`;
+
+exports[`flow() local calls fail twice if there's untyped files 2`] = `
+"These **new** files do not have Flow enabled:
+ - src/untyped.js"
+`;
+
+exports[`flow() local calls warn if there's untyped modified files 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
+`;
+
+exports[`flow() local calls warn if there's untyped new files 1`] = `
+"These **new** files do not have Flow enabled:
+ - src/untyped.js"
+`;
+
+exports[`flow() local does not include created files if modified is set to false 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
+`;
+
+exports[`flow() local does not include modified files if modified is set to false 1`] = `
+"These **new** files do not have Flow enabled:
+ - src/untyped.js"
+`;
+
+exports[`flow() local respects the blacklist globs 1`] = `
+"These **modified** files do not have Flow enabled:
+ - src/second-untyped.js"
+`;
+
 exports[`flow() respects the blacklist globs 1`] = `
 "These **modified** files do not have Flow enabled:
  - src/second-untyped.js"
