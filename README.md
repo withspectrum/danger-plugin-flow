@@ -82,6 +82,17 @@ schedule(flow({
 }))
 ```
 
+#### `platform`
+```
+schedule(flow({
+  platform: "github"
+}))
+
+schedule(flow({
+  platform: "local"
+}))
+```
+
 ## Changelog
 
 See the GitHub [release history](https://github.com/withspectrum/danger-plugin-flow/releases).
